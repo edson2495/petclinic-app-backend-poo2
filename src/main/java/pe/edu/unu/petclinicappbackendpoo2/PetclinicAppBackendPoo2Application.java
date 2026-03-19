@@ -14,14 +14,7 @@ public class PetclinicAppBackendPoo2Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        //Person person = new Person(1, "Pepito","Sanchez");
-        Person person = Person.builder().
-                id(1).
-                name("Carlos").
-                lastname("Sanchez").
-                build();
 
-        System.out.println(person.toString());
 
 
 

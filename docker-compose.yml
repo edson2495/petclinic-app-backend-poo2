@@ -1,0 +1,36 @@
+
+
+services:
+  mysql_service:
+    image: mysql:latest
+    container_name: mysql
+    restart: on-failure
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: petclinic
+      MYSQL_USER: dev
+      MYSQL_PASSWORD: dev123456
+    ports:
+      - 3306:3306
+    healthcheck:
+      # Comando que verifica si MySQL acepta conexiones
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$MYSQL_ROOT_PASSWORD" ]
+      interval: 10s    # Cada cuánto tiempo se hace la prueba
+      timeout: 5s      # Cuánto tiempo esperar antes de fallar
+      retries: 5       # Intentos antes de marcarlo como "unhealthy"
+      start_period: 30s # Tiempo de gracia para el arranque inicial
+    #volumes:
+    #  - ./init-db/:/docker-entrypoint-initdb.d/
+  phpmyadmin_service:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin_gui
+    restart: on-failure
+    depends_on:
+      mysql_service:
+        condition: service_healthy  # Solo arranca si el healthcheck de arriba es exitoso
+    environment:
+      PMA_HOST: mysql_service
+      MYSQL_ROOT_PASSWORD: 123456
+    ports:
+      - "8080:80"
+

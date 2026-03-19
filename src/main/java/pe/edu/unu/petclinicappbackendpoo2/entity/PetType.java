@@ -6,23 +6,20 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "PERSON")
-public class Person {
+@Table(name = "PET_TYPE")
+public class PetType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "VET_ID", nullable = false)
+    @Column(name = "PET_TYPE_ID", nullable = false)
     private Integer id;
 
-    @OneToOne
-    @JoinColumn(name = "PERSON_ID", nullable = false, foreignKey = @ForeignKey(name = "OWNER_PERSON_FK"))
-    private Person person;
+    @Column(name = "NAME", nullable = false, length = 20)
+    private String name;
 
 }

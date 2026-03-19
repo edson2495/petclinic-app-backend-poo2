@@ -1,40 +1,31 @@
 package pe.edu.unu.petclinicappbackendpoo2.entity;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Entity
+@Table(name = "OWNER",
+        uniqueConstraints= {
+                @UniqueConstraint(name = "OWNER_UK", columnNames={"PERSON_ID"})
+        }
+)
 public class Owner {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "VET_ID", nullable = false)
     private Integer id;
 
+    @OneToOne
+    @JoinColumn(name = "PERSON_ID", nullable = false, foreignKey = @ForeignKey(name = "OWNER_PERSON_FK"))
     private Person person;
 
-    public Owner() {
-    }
-
-    public Owner(Integer id, Person person) {
-        this.id = id;
-        this.person = person;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
-
-    @Override
-    public String toString() {
-        return "Owner{" +
-                "id=" + id +
-                ", person=" + person +
-                '}';
-    }
 }
