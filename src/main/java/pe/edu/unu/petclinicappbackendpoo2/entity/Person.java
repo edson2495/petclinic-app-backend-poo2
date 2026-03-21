@@ -18,11 +18,19 @@ public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "VET_ID", nullable = false)
+    @Column(name = "PERSON_ID", nullable = false)
     private Integer id;
 
-    @OneToOne
-    @JoinColumn(name = "PERSON_ID", nullable = false, foreignKey = @ForeignKey(name = "OWNER_PERSON_FK"))
-    private Person person;
+    @Column(name = "NAME", nullable = false, length = 100)
+    private String name;
+
+    @Column(name = "LASTNAME", nullable = false, length = 100)
+    private String lastname;
+
+    @Column(name = "BIRTHDAY", nullable = false)
+    private LocalDate birthday;
+
+    @Column(name = "CELLPHONE", nullable = false, length = 9)
+    private String cellphone;
 
 }

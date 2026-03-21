@@ -1,0 +1,8 @@
+package pe.edu.unu.petclinicappbackendpoo2.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import pe.edu.unu.petclinicappbackendpoo2.entity.Person;
+
+public interface IPersonRepository extends JpaRepository<Person, Integer> {
+}
