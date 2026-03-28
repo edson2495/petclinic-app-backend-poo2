@@ -4,10 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import pe.edu.unu.petclinicappbackendpoo2.entity.Person;
-import pe.edu.unu.petclinicappbackendpoo2.entity.Vet;
-import pe.edu.unu.petclinicappbackendpoo2.repository.IPersonRepository;
-import pe.edu.unu.petclinicappbackendpoo2.repository.IVetRepository;
+import pe.edu.unu.petclinicappbackendpoo2.entity.*;
+import pe.edu.unu.petclinicappbackendpoo2.repository.*;
 import pe.edu.unu.petclinicappbackendpoo2.service.IPersonService;
 
 import java.time.LocalDate;
@@ -18,6 +16,9 @@ public class PetclinicAppBackendPoo2Application implements CommandLineRunner {
 
     private final IPersonRepository personRepository;
     private final IVetRepository vetRepository;
+    private final IOwnerRepository ownerRepository;
+    private final IPetTypeRepository petTypeRepository;
+    private final IPetRepository petRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(PetclinicAppBackendPoo2Application.class, args);
@@ -29,6 +30,9 @@ public class PetclinicAppBackendPoo2Application implements CommandLineRunner {
         // Limpiando todo
         personRepository.deleteAll();
         vetRepository.deleteAll();
+        ownerRepository.deleteAll();
+        petTypeRepository.deleteAll();
+        petRepository.deleteAll();
 
         //agregando data de prueba de personas
 
@@ -53,6 +57,31 @@ public class PetclinicAppBackendPoo2Application implements CommandLineRunner {
         vetRepository.save(
                 Vet.builder()
                         .person(Person.builder().id(1).build())
+                        .build()
+        );
+
+        ownerRepository.save(
+                Owner.builder()
+                        .person(Person.builder().id(2).build())
+                        .build()
+        );
+
+        petTypeRepository.save(
+                PetType.builder()
+                        .name("Can")
+                        .build()
+        );
+        petTypeRepository.save(
+                PetType.builder()
+                        .name("Felino")
+                        .build()
+        );
+
+        petRepository.save(
+                Pet.builder()
+                        .name("Gris")
+                        .owner(Owner.builder().id(1).build())
+                        .petType(PetType.builder().id(2).build())
                         .build()
         );
 

@@ -2,7 +2,6 @@ package pe.edu.unu.petclinicappbackendpoo2.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pe.edu.unu.petclinicappbackendpoo2.entity.Person;
 import pe.edu.unu.petclinicappbackendpoo2.entity.Vet;
 import pe.edu.unu.petclinicappbackendpoo2.repository.IVetRepository;
 import pe.edu.unu.petclinicappbackendpoo2.service.IVetService;

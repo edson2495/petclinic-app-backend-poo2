@@ -22,13 +22,18 @@ public class PersonController {
     private final IPersonService service;
 
     @GetMapping
-    public ResponseEntity<List<Person>> findall(){
-        return ResponseEntity.ok(service.findAll());
+    public ResponseEntity<List<PersonResponse>> findall(){
+        List<Person> people = service.findAll();//API Stream - java 8+
+        List<PersonResponse> peopleResponse = people.stream().
+                map(p -> ModelMapperUtil.convertTo(p, PersonResponse.class))
+                .toList();
+        return ResponseEntity.ok(peopleResponse);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Person> findById(@PathVariable Integer id){
-        return ResponseEntity.ok(service.findById(id));
+    public ResponseEntity<PersonResponse> findById(@PathVariable Integer id){
+        Person person = service.findById(id);
+        return ResponseEntity.ok( ModelMapperUtil.convertTo(person, PersonResponse.class) );
     }
 
     @PostMapping
@@ -53,9 +58,9 @@ public class PersonController {
 ////        .build();
 //        PersonResponse personResponse = convertToResponse(person);
 
-        Person personToSave = ModelMapperUtil.convertToEntity(personRequest);
+        Person personToSave = ModelMapperUtil.convertTo(personRequest, Person.class);
         Person person = service.save(personToSave);
-        PersonResponse personResponse = ModelMapperUtil.convertToResponse(person);
+        PersonResponse personResponse = ModelMapperUtil.convertTo(person, PersonResponse.class);
 
         return new ResponseEntity<>(personResponse, HttpStatus.CREATED);
     }
@@ -63,10 +68,10 @@ public class PersonController {
     @PutMapping("/{id}")
     public ResponseEntity<PersonResponse> update(@PathVariable Integer id, @RequestBody PersonRequest personRequest){
 
-        Person personToUpdate = ModelMapperUtil.convertToEntity(personRequest);
+        Person personToUpdate = ModelMapperUtil.convertTo(personRequest, Person.class);
         personToUpdate.setId(id);
         Person person = service.save(personToUpdate);
-        PersonResponse personResponse = ModelMapperUtil.convertToResponse(person);
+        PersonResponse personResponse = ModelMapperUtil.convertTo(person, PersonResponse.class);
 
         return ResponseEntity.ok(personResponse);
     }
