@@ -2,6 +2,7 @@ package pe.edu.unu.petclinicappbackendpoo2.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,12 +15,17 @@ import pe.edu.unu.petclinicappbackendpoo2.service.IPersonService;
 import java.util.List;
 
 @RestController
-//@Controller
 @RequestMapping("api/v1/people")
 @RequiredArgsConstructor
 public class PersonController {
 
     private final IPersonService service;
+
+    @GetMapping("/page/{page}/{size}")
+    public ResponseEntity<Page<PersonResponse>> page(@PathVariable("page") Integer page, @PathVariable("size") Integer size){
+        Page<PersonResponse> peoplePage = service.page(page, size);
+        return new ResponseEntity<>(peoplePage, HttpStatus.OK);
+    }
 
     @GetMapping
     public ResponseEntity<List<PersonResponse>> findall(){

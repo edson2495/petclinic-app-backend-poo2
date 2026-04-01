@@ -4,7 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.unu.petclinicappbackendpoo2.DTO.response.PetResponse;
+import pe.edu.unu.petclinicappbackendpoo2.DTO.response.VetResponse;
+import pe.edu.unu.petclinicappbackendpoo2.Util.ModelMapperUtil;
 import pe.edu.unu.petclinicappbackendpoo2.entity.Pet;
+import pe.edu.unu.petclinicappbackendpoo2.entity.Vet;
 import pe.edu.unu.petclinicappbackendpoo2.service.IPetService;
 
 import java.util.List;
@@ -17,8 +21,12 @@ public class PetController {
     private final IPetService service;
 
     @GetMapping
-    public ResponseEntity<List<Pet>> findall(){
-        return ResponseEntity.ok(service.findAll());
+    public ResponseEntity<List<PetResponse>> findall(){
+        List<Pet> pets = service.findAll();
+        List<PetResponse> petsReponses = pets.stream()
+                .map(pet -> ModelMapperUtil.convertTo(pet, PetResponse.class))
+                .toList();
+        return ResponseEntity.ok(petsReponses);
     }
 
     @GetMapping("/{id}")

@@ -1,0 +1,19 @@
+package pe.edu.unu.petclinicappbackendpoo2.DTO.response;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import pe.edu.unu.petclinicappbackendpoo2.entity.Owner;
+import pe.edu.unu.petclinicappbackendpoo2.entity.PetType;
+
+@Data
+@Builder
+@AllArgsConstructor
+public class PetResponse {
+
+    private Integer id;
+    private String name;
+    private Owner owner;
+    private PetType petType;
+
+}
