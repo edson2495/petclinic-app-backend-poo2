@@ -1,5 +1,6 @@
 package pe.edu.unu.petclinicappbackendpoo2.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -43,7 +44,7 @@ public class PersonController {
     }
 
     @PostMapping
-    public ResponseEntity<PersonResponse> save(@RequestBody PersonRequest personRequest){
+    public ResponseEntity<PersonResponse> save(@Valid @RequestBody PersonRequest personRequest){
 
 ////        Person personToSave = Person.builder()
 ////        .name(personRequest.getName())

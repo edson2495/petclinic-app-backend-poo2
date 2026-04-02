@@ -1,9 +1,5 @@
 package pe.edu.unu.petclinicappbackendpoo2.DTO.request;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.ForeignKey;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,8 +11,9 @@ import pe.edu.unu.petclinicappbackendpoo2.entity.PetType;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PetRequest {
+public class PetSaveRequest {
 
+    private Integer id;
     private String name;
     private Owner owner;
     private PetType petType;

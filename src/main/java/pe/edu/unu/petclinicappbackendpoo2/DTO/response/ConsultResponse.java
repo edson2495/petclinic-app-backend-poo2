@@ -4,18 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pe.edu.unu.petclinicappbackendpoo2.entity.Owner;
-import pe.edu.unu.petclinicappbackendpoo2.entity.PetType;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PetResponse {
+public class ConsultResponse {
 
     private Integer id;
-    private String name;
-    private Owner owner;
-    private PetType petType;
+    private String diagnostic;
+    private PetResponse pet;
+    private VetResponse vet;
 
 }

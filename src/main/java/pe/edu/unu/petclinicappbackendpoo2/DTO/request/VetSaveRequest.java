@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class VetRequest {
+public class VetSaveRequest {
 
+    private Integer id;
     private PersonRequest person;
 
 }
